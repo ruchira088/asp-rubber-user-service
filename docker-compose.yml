@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  asp-user-service:
+    build: .
+    ports:
+      - 5005:5005
+    volumes:
+      - "~/.sbt:/root/.sbt"
+      - "~/.ivy2:/root/.ivy2"
+      - ".:/opt/asp-user-service"
+      - "/opt/asp-user-service/target"
+      - "/opt/asp-user-service/project/target"
