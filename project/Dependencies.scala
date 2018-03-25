@@ -10,6 +10,14 @@ object Dependencies
   lazy val akkaHttp = "com.typesafe.akka" %% "akka-http" % AKKA_HTTP_VERSION
   lazy val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % AKKA_HTTP_VERSION
 
+  lazy val jodaTime = "joda-time" % "joda-time" % "2.9.9"
+
+  lazy val jbcrypt = "org.mindrot" % "jbcrypt" % "0.4"
+
+  lazy val scalaz = "org.scalaz" %% "scalaz-core" % "7.2.20"
+
+  lazy val reactiveMongo = "org.reactivemongo" %% "reactivemongo" % "0.13.0"
+
   lazy val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0"
   lazy val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.2.3"
 

@@ -13,6 +13,10 @@ lazy val root = (project in file("."))
 
     libraryDependencies ++= Seq(
       akkaActor, akkaStream, akkaHttp, akkaHttpSprayJson,
+      jodaTime,
+      jbcrypt,
+      scalaz,
+      reactiveMongo,
       scalaLogging, logbackClassic,
 
       scalaTest % Test,

@@ -12,3 +12,8 @@ services:
       - ".:/opt/asp-user-service"
       - "/opt/asp-user-service/target"
       - "/opt/asp-user-service/project/target"
+
+  mongo-database:
+    image: mongo
+    ports:
+      - 27017:27017
