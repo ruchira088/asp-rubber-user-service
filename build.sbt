@@ -4,7 +4,7 @@ lazy val root = (project in file("."))
   .settings(
     inThisBuild(List(
       organization := "com.ruchij",
-      scalaVersion := "2.12.4"
+      scalaVersion := "2.12.5"
     )),
 
     name := "asp-user-service",
