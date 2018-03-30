@@ -12,9 +12,6 @@ object IndexRoute
   def apply() =
     handleRejections(rejectionHandler) {
       AdminRoute() ~
-//      post {
-//        complete("awesome awesome")
-//      } ~
       path("info") {
         get {
           complete(ServiceInformation())
@@ -28,8 +25,6 @@ object IndexRoute
         .handle {
           case ItemValidationRejection(validationErrors) =>
             complete(UnprocessableEntity, ErrorResponse(validationErrors))
-
-          case _ => complete(NotFound)
         }
         .result()
 }

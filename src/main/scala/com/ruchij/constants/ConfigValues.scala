@@ -7,4 +7,6 @@ object ConfigValues
   val DEFAULT_HTTP_PORT = 8000
 
   val DEFAULT_COUNTRY = "Australia"
+
+  val MONGO_MAX_QUERY_RESULT_SIZE = 25
 }
