@@ -10,4 +10,8 @@ case class Administrator(
     email: String,
     firstName: String,
     lastName: Option[String]
-)
+) {
+  self =>
+
+  def sanitize: Administrator = self.copy(password = None)
+}

@@ -1,15 +1,15 @@
 package com.ruchij.daos.impl.mongo
 
-import com.ruchij.daos.AdministratorDao
+import com.ruchij.daos.AdminDao
 import com.ruchij.models.Administrator
 import reactivemongo.bson.BSONDocument
 import scalaz.OptionT
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class MongoAdministratorDao(mongoDao: MongoDataAccessObject[Administrator])
-                           (implicit val executionContext: ExecutionContext)
-  extends AdministratorDao
+class MongoAdminDao(mongoDao: MongoDataAccessObject[Administrator])
+                   (implicit val executionContext: ExecutionContext)
+  extends AdminDao
 {
   override type Selector = BSONDocument
 
@@ -22,21 +22,21 @@ class MongoAdministratorDao(mongoDao: MongoDataAccessObject[Administrator])
   override def getByUsername(username: String): OptionT[Future, Administrator] =
     OptionT {
       for {
-        result <- find(BSONDocument("username" -> username))
+        result <- mongoDao.findByKeyValue("username" -> username)
       }
       yield result.headOption
     }
 }
 
-object MongoAdministratorDao
+object MongoAdminDao
 {
   import BSONDocumentHandlers._
 
   val COLLECTION_NAME = "administrators"
 
-  def apply(mongoUri: String)(implicit executionContext: ExecutionContext): Future[MongoAdministratorDao] =
+  def apply(mongoUri: String)(implicit executionContext: ExecutionContext): Future[MongoAdminDao] =
     for {
       collection <- MongoDataAccessObject.collection(mongoUri, COLLECTION_NAME)
     }
-    yield new MongoAdministratorDao(new MongoDataAccessObject[Administrator](collection))
+    yield new MongoAdminDao(new MongoDataAccessObject[Administrator](collection))
 }
