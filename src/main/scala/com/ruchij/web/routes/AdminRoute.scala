@@ -8,20 +8,16 @@ import com.ruchij.web.requests.CreateAdminRequest
 import com.ruchij.web.requests.validations.RequestBodyDirective._
 import com.ruchij.web.utils.JsonWriters._
 
-import scala.util.{Failure, Success}
-
 object AdminRoute
 {
+  import IndexRoute.responseHandler
+
   def apply(adminService: AdminService): Route =
     path("admin") {
       post {
         requestBody(getAs[CreateAdminRequest]) {
           createAdminRequest =>
-            onComplete(adminService.create(createAdminRequest)) {
-              case Success(administrator) => complete(administrator)
-
-              case Failure(_) => ???
-            }
+            onComplete(adminService.create(createAdminRequest))(responseHandler)
         }
       }
     }
