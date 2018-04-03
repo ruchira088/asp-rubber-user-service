@@ -7,9 +7,11 @@ lazy val root = (project in file("."))
       scalaVersion := "2.12.5"
     )),
 
-    name := "asp-user-service",
+    name := "asp-rubber-user-service",
     buildInfoKeys := BuildInfoKey.ofN(name, version, scalaVersion, sbtVersion),
     buildInfoPackage := "com.eed3si9n.ruchij",
+
+    assemblyJarName in assembly := "asp-rubber-user-service.jar",
 
     libraryDependencies ++= Seq(
       akkaActor, akkaStream, akkaHttp, akkaHttpSprayJson,
