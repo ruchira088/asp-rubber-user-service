@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  "CF template for asp-rubber-user-service"
+
+Parameters:
+  dockerRepositoryName:
+    Type: String
+
+Resources:
+  DockerRepository:
+    Type: "AWS::ECR::Repository"
+    Properties:
+      RepositoryName: !Ref dockerRepositoryName
