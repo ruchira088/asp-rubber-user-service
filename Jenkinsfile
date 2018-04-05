@@ -31,13 +31,12 @@ pipeline {
             steps {
 
                 sh """
+                    ./.deploy/deploy-utils.sh && \
                     aws ecr get-login --no-include-email --region ap-southeast-2 | bash && \
                     docker build -t ${env.NAME} -f .deploy/Dockerfile . && \
                     docker tag ${env.NAME}:latest ${params.DOCKER_REPO}/${env.NAME}:latest && \
                     docker push ${params.DOCKER_REPO}/${env.NAME}:latest
                     """
-
-                echo "Publishing the Docker image"
             }
         }
     }
