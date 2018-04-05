@@ -1,9 +1,12 @@
 package com.ruchij.daos.impl.mongo
 
 import com.eed3si9n.ruchij.BuildInfo
+import com.ruchij.EnvironmentVariables
 import com.ruchij.constants.ConfigValues
+import com.ruchij.constants.EnvValueNames._
 import com.ruchij.daos.DataAccessObject
 import com.ruchij.exceptions.MongoInsertionException
+import com.ruchij.utils.ConfigUtils.getEnvValue
 import com.ruchij.utils.GeneralUtils.normalize
 import com.ruchij.utils.ScalaUtils.predicate
 import reactivemongo.api.collections.bson.BSONCollection
@@ -11,6 +14,7 @@ import reactivemongo.api.{Cursor, MongoConnection, MongoDriver}
 import reactivemongo.bson.{BSONDocument, BSONDocumentHandler, BSONValue, BSONWriter}
 
 import scala.concurrent.{ExecutionContext, Future}
+import scala.util.Try
 
 class MongoDataAccessObject[A](bsonCollection: BSONCollection)
           (implicit documentHandler: BSONDocumentHandler[A], executionContext: ExecutionContext)
@@ -38,6 +42,16 @@ class MongoDataAccessObject[A](bsonCollection: BSONCollection)
 
 object MongoDataAccessObject
 {
+  def mongoUri()(implicit environmentVariables: EnvironmentVariables): Try[String] =
+    for {
+      host <- getEnvValue(MONGO_HOST)
+      port <- getEnvValue(MONGO_PORT)
+      username <- getEnvValue(MONGO_USERNAME)
+      password <- getEnvValue(MONGO_PASSWORD)
+      database <- getEnvValue(MONGO_DATABASE)
+    }
+    yield s"mongodb://$username:$password@$host:$port/$database"
+
   def collection(mongoUri: String, collectionName: String)
                 (implicit executionContext: ExecutionContext): Future[BSONCollection] =
     for {

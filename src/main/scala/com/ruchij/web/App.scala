@@ -8,7 +8,7 @@ import com.eed3si9n.ruchij.BuildInfo
 import com.ruchij.EnvironmentVariables
 import com.ruchij.constants.ConfigValues._
 import com.ruchij.constants.EnvValueNames._
-import com.ruchij.daos.impl.mongo.MongoAdminDao
+import com.ruchij.daos.impl.mongo.{MongoAdminDao, MongoDataAccessObject}
 import com.ruchij.ecs.BlockingExecutionContext
 import com.ruchij.services.AdminService
 import com.ruchij.services.hashing.BlowfishPasswordHashing
@@ -36,7 +36,7 @@ object App
 
     val result: Future[ServerBinding] =
       for {
-        mongoUri <- fromTry(getEnvValue(MONGO_URI))
+        mongoUri <- fromTry(MongoDataAccessObject.mongoUri())
 
         adminDao <- MongoAdminDao(mongoUri)
         blockingExecutionContext = BlockingExecutionContext()
