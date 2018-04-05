@@ -13,5 +13,5 @@ versionTag="v$((`cat .deploy/docker-version.txt` + 1))"
 
 aws ecr get-login --no-include-email --region ap-southeast-2 | bash
 docker build -t ${NAME} -f .deploy/Dockerfile .
-docker tag ${NAME}:latest ${params.DOCKER_REPO}/${NAME}:$versionTag
-docker push ${params.DOCKER_REPO}/${NAME}:$versionTag
+docker tag ${NAME}:latest ${params.DOCKER_REPO}/${NAME}:${versionTag}
+docker push ${params.DOCKER_REPO}/${NAME}:${versionTag}
