@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh """
                     docker run \
-                    -e STACK_NAME=${env.NAME} \
+                    -e STACK_NAME=${NAME} \
                     -w=/opt \
                     -v "$WORKSPACE/.deploy:/opt" \
                     node bash -c "./create-update-cf.sh"
@@ -30,13 +30,7 @@ pipeline {
         stage("Publish Docker image") {
             steps {
 
-                sh """
-                    ./.deploy/deploy-utils.sh && \
-                    aws ecr get-login --no-include-email --region ap-southeast-2 | bash && \
-                    docker build -t ${env.NAME} -f .deploy/Dockerfile . && \
-                    docker tag ${env.NAME}:latest ${params.DOCKER_REPO}/${env.NAME}:latest && \
-                    docker push ${params.DOCKER_REPO}/${env.NAME}:latest
-                    """
+                sh "./.deploy/publish-docker-image.sh"
             }
         }
     }
