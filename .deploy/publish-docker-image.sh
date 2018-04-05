@@ -5,7 +5,6 @@ docker build -t deployment-utils -f deployment-utils/Dockerfile ./deployment-uti
 rm -rf deployment-utils
 
 docker run \
-    -v "$HOME/.aws:/root/.aws" \
     -v "$PWD/.deploy:/opt/deployment-utils/output" \
     deployment-utils \
     --command docker-image-version-tag --repositoryName ${NAME}
