@@ -48,7 +48,7 @@ object MongoDataAccessObject
       port <- getEnvValue(MONGO_PORT)
       username <- getEnvValue(MONGO_USERNAME)
       password <- getEnvValue(MONGO_PASSWORD)
-      database <- getEnvValue(MONGO_DATABASE)
+      database = BuildInfo.name
     }
     yield s"mongodb://$username:$password@$host:$port/$database"
 

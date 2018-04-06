@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  asp-user-service:
+  asp-rubber-user-service:
     build: .
     ports:
       - 5005:5005
@@ -14,9 +14,16 @@ services:
       - "/opt/asp-user-service/target"
       - "/opt/asp-user-service/project/target"
     environment:
-      MONGO_URI: "mongodb://mongo-database:27017/asp-users"
+      MONGO_HOST: "mongo-database"
+      MONGO_PORT: "27017"
+      MONGO_USERNAME: "asp-rubber"
+      MONGO_PASSWORD: "secret-password"
 
   mongo-database:
-    image: mongo
+    image: bitnami/mongodb
     ports:
       - 27017:27017
+    environment:
+      MONGODB_DATABASE: "asp-rubber-user-service"
+      MONGODB_USERNAME: "asp-rubber"
+      MONGODB_PASSWORD: "secret-password"
