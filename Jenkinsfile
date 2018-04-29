@@ -15,7 +15,7 @@ pipeline {
                 script {
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
-                sh "sbt testWithCoverage"
+                sh "docker images"
             }
         }
 
