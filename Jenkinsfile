@@ -1,5 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            label "jenkins-pod"
+            defaultContainer "jnlp"
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+    containers:
+    - name: nodejs
+      image: node
+      command:
+        - cat
+      tty: true
+"""
+        }
+    }
 
     options {
         disableConcurrentBuilds()
@@ -15,7 +31,9 @@ pipeline {
                 script {
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
-                sh "docker images"
+                container("nodejs") {
+                    sh "node -v"
+                }
             }
         }
 
