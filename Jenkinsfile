@@ -34,7 +34,10 @@ spec:
                 }
 
                 container("ubuntu") {
-                    sh "echo 'Hello World'"
+                    sh """
+                        echo 'Hello World'
+                        echo 'Foobar'
+                        """
                 }
 
                 container("java") {
