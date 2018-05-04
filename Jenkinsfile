@@ -33,8 +33,8 @@ spec:
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
 
-                container("ubuntu") {
-                    sh "echo 'Hello World'"
+                container("nodejs") {
+                    sh "node -v"
                 }
             }
         }
