@@ -8,12 +8,12 @@ apiVersion: v1
 kind: Pod
 spec:
     containers:
-    - name: nodejs
-      image: node
-      tty: true
-    - name: ubuntu
-      image: ubuntu
-      tty: true
+        - name: ubuntu
+          image: ubuntu
+          tty: true
+        - name: nodejs
+          image: node
+          tty: true
 """
         }
     }
@@ -33,8 +33,8 @@ spec:
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
 
-                container("nodejs") {
-                    sh "node -v"
+                container("ubuntu") {
+                    sh "echo 'Hello World'"
                 }
             }
         }
