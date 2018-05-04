@@ -10,8 +10,9 @@ spec:
     containers:
     - name: nodejs
       image: node
-      command:
-        - cat
+      tty: true
+    - name: ubuntu
+      image: ubuntu
       tty: true
 """
         }
@@ -31,8 +32,9 @@ spec:
                 script {
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
-                container("nodejs") {
-                    sh "node -v"
+
+                container("ubuntu") {
+                    sh "echo 'Hello World'"
                 }
             }
         }
