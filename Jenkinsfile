@@ -11,8 +11,8 @@ spec:
         - name: ubuntu
           image: ubuntu
           tty: true
-        - name: nodejs
-          image: node
+        - name: java
+          image: openjdk
           tty: true
 """
         }
@@ -35,6 +35,10 @@ spec:
 
                 container("ubuntu") {
                     sh "echo 'Hello World'"
+                }
+
+                container("java") {
+                    sh "java -version"
                 }
             }
         }
