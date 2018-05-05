@@ -45,6 +45,7 @@ spec:
 
                         printenv
 
+                        aws --version
                         aws ssm get-parameter --name github-pat --with-decryption
 
                         ls -a
