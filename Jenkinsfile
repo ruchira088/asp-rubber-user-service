@@ -8,11 +8,11 @@ apiVersion: v1
 kind: Pod
 spec:
     containers:
-        - name: ubuntu
-          image: ubuntu
+        - name: node
+          image: node
           tty: true
-        - name: java
-          image: openjdk
+        - name: openjdk
+          image: openjdk:8-jdk
           tty: true
 """
         }
@@ -40,17 +40,21 @@ spec:
                         """
                 }
 
-                container("java") {
+                container("openjdk") {
                     sh """
                         apt-get update && \
-                            apt-get install apt-transport-https bc ca-certificates awscli software-properties-common -y
+                            apt-get install apt-transport-https bc ca-certificates jq awscli software-properties-common -y
 
                         echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list && \
                             apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823 && \
                             apt-get update && \
                             apt-get install sbt -y
 
-                         ls -a
+                        printenv
+
+                        aws ssm get-parameter --name github-pat --with-decryption
+
+                        ls -a
                     """
                 }
             }
