@@ -33,13 +33,6 @@ spec:
                     env.NAME = "$JOB_NAME".replace("/", "-")
                 }
 
-                container("ubuntu") {
-                    sh """
-                        echo 'Hello World'
-                        echo 'Foobar'
-                        """
-                }
-
                 container("openjdk") {
                     sh """
                         apt-get update && \
