@@ -48,7 +48,7 @@ spec:
                         ln -s /root/.local/bin/aws /usr/local/bin
 
                         aws --version
-                        aws ssm get-parameter --name github-pat --with-decryption
+                        aws ssm get-parameter --name github-pat --with-decryption --region ap-southeast-2
 
                         ls -a
                     """
