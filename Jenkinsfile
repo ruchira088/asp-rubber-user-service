@@ -45,11 +45,7 @@ spec:
 
                         apt-get install python-pip python-dev build-essential -y && \
                         pip install awscli --upgrade --user && \
-                        ln -s $WORKSPACE/.local/bin/aws /usr/local/bin
-
-                        find / -name aws
-
-                        printenv
+                        ln -s /root/.local/bin/aws /usr/local/bin
 
                         aws --version
                         aws ssm get-parameter --name github-pat --with-decryption
