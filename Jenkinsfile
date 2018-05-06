@@ -43,11 +43,13 @@ spec:
                             apt-get update && \
                             apt-get install sbt -y
 
-                        printenv
-
                         apt-get install python-pip python-dev build-essential -y && \
                         pip install awscli --upgrade --user && \
                         ln -s $WORKSPACE/.local/bin/aws /usr/local/bin
+
+                        find / -name aws
+
+                        printenv
 
                         aws --version
                         aws ssm get-parameter --name github-pat --with-decryption
