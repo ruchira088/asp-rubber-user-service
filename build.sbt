@@ -4,7 +4,7 @@ lazy val root = (project in file("."))
   .settings(
     inThisBuild(List(
       organization := "com.ruchij",
-      scalaVersion := "2.12.5"
+      scalaVersion := "2.12.6"
     )),
 
     name := "asp-rubber-user-service",
@@ -28,9 +28,7 @@ lazy val root = (project in file("."))
 
 enablePlugins(BuildInfoPlugin)
 
-coverageEnabled := true
-
 testOptions in Test +=
   Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-results")
 
-addCommandAlias("testWithCoverage", "; clean; test; coverageReport")
+addCommandAlias("testWithCoverage", "; clean; coverage; test; coverageReport")
